@@ -71,8 +71,25 @@ export default function OrdersPage() {
     setSaving(true);
     setError("");
     try {
-      await apiPost("/api/orders", data);
-      setSuccess("Order created successfully!");
+      const res = await apiPost("/api/orders", data);
+      const orderId = res.data?._id;
+      const origin = typeof window !== "undefined" ? window.location.origin : "";
+      const trackingUrl = `${origin}/order/${orderId}`;
+
+      setSuccess(
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 w-full">
+          <span>Order created successfully!</span>
+          <button
+            className="btn btn-xs btn-secondary cursor-pointer"
+            onClick={() => {
+              navigator.clipboard.writeText(trackingUrl);
+              alert("Tracking link copied:\n" + trackingUrl);
+            }}
+          >
+            🔗 Copy Tracking Link
+          </button>
+        </div>
+      );
       setShowModal(false);
       fetchOrders();
     } catch (err) {
