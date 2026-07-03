@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { apiGet, apiPost, apiPatch } from "@/lib/api";
+import EmptyState from "@/components/ui/EmptyState";
 
 export default function StaffPage() {
   const [staffList, setStaffList] = useState([]);
@@ -168,9 +169,16 @@ export default function StaffPage() {
       {/* Staff List Table */}
       {!loading && isAdmin && (
         <div className="bg-base-100 rounded-xl border border-base-300 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="table table-zebra w-full align-middle">
-              <thead>
+          {staffList.length === 0 ? (
+            <EmptyState
+              icon="👥"
+              title="No staff members"
+              description="Register your first staff account."
+            />
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="table table-zebra w-full align-middle">
+                <thead>
                 <tr className="bg-base-200">
                   <th>Name</th>
                   <th>User ID</th>
@@ -233,6 +241,7 @@ export default function StaffPage() {
               </tbody>
             </table>
           </div>
+          )}
         </div>
       )}
 

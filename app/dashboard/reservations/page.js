@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { apiGet, apiPatch } from "@/lib/api";
 import StatusBadge from "@/components/ui/StatusBadge";
+import EmptyState from "@/components/ui/EmptyState";
 
 export default function ReservationsPage() {
   const [reservations, setReservations] = useState([]);
@@ -215,15 +216,11 @@ export default function ReservationsPage() {
       {!loading && (
         <div className="bg-base-100 rounded-xl border border-base-300 overflow-hidden">
           {reservations.length === 0 ? (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4 opacity-30">📅</div>
-              <h3 className="text-xl font-bold opacity-60">
-                No Reservations for this Date
-              </h3>
-              <p className="opacity-40 mt-1">
-                Select a different date or check customer bookings.
-              </p>
-            </div>
+            <EmptyState
+              icon="📅"
+              title="No Reservations for this Date"
+              description="Select a different date or check customer bookings."
+            />
           ) : (
             <div className="overflow-x-auto">
               <table className="table table-zebra w-full align-middle">

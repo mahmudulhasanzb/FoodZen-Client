@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { apiGet, apiPost, apiPatch } from "@/lib/api";
 import StatusBadge from "@/components/ui/StatusBadge";
 import BillForm from "@/components/billing/BillForm";
+import EmptyState from "@/components/ui/EmptyState";
 
 export default function BillingPage() {
   const [orders, setOrders] = useState([]);
@@ -210,13 +211,11 @@ export default function BillingPage() {
           {activeTab === "served-orders" && (
             <div className="space-y-4">
               {servedWithoutBill.length === 0 ? (
-                <div className="text-center py-16 border border-dashed border-base-300 rounded-xl">
-                  <div className="text-6xl mb-4 opacity-30">🍽️</div>
-                  <h3 className="text-xl font-bold opacity-60">No Served Orders</h3>
-                  <p className="opacity-40 mt-1">
-                    There are no served orders waiting to be billed.
-                  </p>
-                </div>
+                <EmptyState
+                  icon="🍽️"
+                  title="No Served Orders"
+                  description="There are no served orders waiting to be billed."
+                />
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {servedWithoutBill.map((order) => {
@@ -297,13 +296,11 @@ export default function BillingPage() {
           {activeTab === "open-bills" && (
             <div className="overflow-x-auto border border-base-300 rounded-xl">
               {openBills.length === 0 ? (
-                <div className="text-center py-16">
-                  <div className="text-6xl mb-4 opacity-30">💵</div>
-                  <h3 className="text-xl font-bold opacity-60">No Open Bills</h3>
-                  <p className="opacity-40 mt-1 font-normal">
-                    Create bills from served orders to see them here.
-                  </p>
-                </div>
+                <EmptyState
+                  icon="💵"
+                  title="No Open Bills"
+                  description="Create bills from served orders to see them here."
+                />
               ) : (
                 <table className="table table-zebra w-full align-middle">
                   <thead>
@@ -360,13 +357,11 @@ export default function BillingPage() {
           {activeTab === "paid-bills" && (
             <div className="overflow-x-auto border border-base-300 rounded-xl">
               {paidBills.length === 0 ? (
-                <div className="text-center py-16">
-                  <div className="text-6xl mb-4 opacity-30">✅</div>
-                  <h3 className="text-xl font-bold opacity-60">No Transaction History</h3>
-                  <p className="opacity-40 mt-1 font-normal">
-                    Completed payments will appear here.
-                  </p>
-                </div>
+                <EmptyState
+                  icon="✅"
+                  title="No Transaction History"
+                  description="Completed payments will appear here."
+                />
               ) : (
                 <table className="table table-zebra w-full align-middle">
                   <thead>

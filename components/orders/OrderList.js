@@ -1,15 +1,16 @@
 "use client";
 
 import StatusBadge from "@/components/ui/StatusBadge";
+import EmptyState from "@/components/ui/EmptyState";
 
 export default function OrderList({ orders, onUpdateStatus, onEdit, currentRole }) {
   if (!orders || orders.length === 0) {
     return (
-      <div className="text-center py-16">
-        <div className="text-6xl mb-4 opacity-20">📝</div>
-        <h2 className="text-xl font-semibold opacity-60">No orders found</h2>
-        <p className="opacity-40 mt-1">Create your first order to get started.</p>
-      </div>
+      <EmptyState
+        icon="📝"
+        title="No orders found"
+        description="Create your first order to get started."
+      />
     );
   }
 
