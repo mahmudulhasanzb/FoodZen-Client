@@ -1,6 +1,13 @@
 import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-export default function PublicNav() {
+export default async function PublicNav() {
+  const sessionData = await auth.api.getSession({
+    headers: await headers(),
+  });
+  const session = sessionData?.session;
+
   return (
     <header className="navbar bg-base-100 border-b border-base-300 px-4">
       <div className="flex-1">
@@ -15,10 +22,19 @@ export default function PublicNav() {
         <Link href="/reserve" className="btn btn-primary btn-sm">
           Reserve
         </Link>
-        <Link href="/login" className="btn btn-ghost btn-sm">
-          Staff Login
-        </Link>
+        {
+          session ? (
+            <Link href="/dashboard" className="btn btn-ghost btn-sm">
+              Dashboard
+            </Link>
+          ) : (
+            <Link href="/login" className="btn btn-ghost btn-sm">
+              Login
+            </Link>
+          )
+        }
       </nav>
     </header>
   );
 }
+
