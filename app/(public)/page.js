@@ -3,21 +3,35 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-[80vh] justify-center items-center py-12 px-4 space-y-12">
-      {/* Hero Section */}
-      <div className="text-center max-w-2xl space-y-6">
-        <h1 className="text-6xl font-extrabold tracking-tight text-primary">
-          FoodZen
-        </h1>
-        <p className="text-xl opacity-80 leading-relaxed">
-          Premium culinary experience in a warm, welcoming atmosphere. Browse our seasonal menu or reserve your table today.
-        </p>
-        <div className="flex gap-4 justify-center flex-wrap pt-2">
-          <Link href="/menu" className="btn btn-primary btn-lg cursor-pointer">
-            📖 Browse Menu
-          </Link>
-          <Link href="/reserve" className="btn btn-outline btn-lg cursor-pointer">
-            📅 Reserve a Table
-          </Link>
+      {/* Hero Section - Two-Column Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-6xl w-full mx-auto">
+        {/* Left Side: Texts */}
+        <div className="lg:col-span-7 space-y-6 text-left">
+          <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-primary">
+            FoodZen
+          </h1>
+          <p className="text-xl opacity-80 leading-relaxed max-w-lg">
+            Premium culinary experience in a warm, welcoming atmosphere. Browse our seasonal menu or reserve your table today.
+          </p>
+          <div className="flex gap-4 justify-start flex-wrap pt-2">
+            <Link href="/menu" className="btn btn-primary btn-lg cursor-pointer">
+              📖 Browse Menu
+            </Link>
+            <Link href="/reserve" className="btn btn-outline btn-lg cursor-pointer">
+              📅 Reserve a Table
+            </Link>
+          </div>
+        </div>
+
+        {/* Right Side: Restaurant Image */}
+        <div className="lg:col-span-5 w-full">
+          <div className="relative w-full h-[320px] sm:h-[400px] rounded-3xl overflow-hidden border border-base-300 shadow-sm bg-base-200">
+            <img 
+              src="https://i.ibb.co/qy0P65H/restaurant.jpg" 
+              alt="Zen Restaurant" 
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" 
+            />
+          </div>
         </div>
       </div>
 
